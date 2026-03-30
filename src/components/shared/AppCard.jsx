@@ -5,7 +5,7 @@ export default function AppCard({ app }) {
     <Link to={`/apps/${app.id}`} className="no-underline">
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900 overflow-hidden hover:shadow-2xl dark:hover:shadow-2xl transition-all duration-300 transform hover:scale-105 flex flex-col h-full">
         {/* Icon Container with Gradient Background */}
-        <div className="bg-linear-to-br from-gray-50 dark:from-gray-700 to-gray-100 dark:to-gray-800 p-6 sm:p-8 flex items-center justify-center min-h-32 sm:min-h-40">
+        <div className="bg-gradient-to-br from-gray-50 dark:from-gray-700 to-gray-100 dark:to-gray-800 p-6 sm:p-8 flex items-center justify-center min-h-32 sm:min-h-40">
           <img 
             src={app.image} 
             alt={app.title} 
@@ -13,11 +13,11 @@ export default function AppCard({ app }) {
           />
         </div>
 
-        <div className="p-4 sm:p-5 flex flex-col grow">
+        <div className="p-4 sm:p-5 flex flex-col flex-grow">
           <h3 className="font-bold text-base sm:text-lg text-gray-900 dark:text-white truncate">{app.title}</h3>
           <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm font-medium">{app.companyName}</p>
           
-          <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm my-2 sm:my-3 line-clamp-2 grow">{app.description}</p>
+          <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm my-2 sm:my-3 line-clamp-2 flex-grow">{app.description}</p>
           
           <div className="flex flex-wrap justify-between items-center mt-auto pt-2 sm:pt-3 border-t border-gray-200 dark:border-gray-700 gap-2">
             <div className="flex items-center gap-1 sm:gap-2">
