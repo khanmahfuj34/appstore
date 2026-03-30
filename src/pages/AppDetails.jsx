@@ -132,8 +132,10 @@ export default function AppDetails() {
               >
                 {installed ? "✓ Installed" : "Install Now"}
               </button>
+              </div>
             </div>
           </div>
+        </div>
 
         {/* Ratings Section */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900 p-4 sm:p-6 md:p-8 mb-6 sm:mb-8">
