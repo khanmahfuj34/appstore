@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 
 export default function Header() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isDark, setIsDark] = useState(localStorage.getItem("darkMode") === "true");
+  const [isDark, setIsDark] = useState(() => localStorage.getItem("darkMode") === "true");
 
-  // Sync dark mode state when component mounts
+  // Apply initial dark mode on mount
   useEffect(() => {
-    const currentMode = localStorage.getItem("darkMode") === "true";
-    if (currentMode) {
+    const isDarkMode = localStorage.getItem("darkMode") === "true";
+    if (isDarkMode) {
       document.documentElement.classList.add("dark");
       document.body.classList.add("dark");
     } else {
@@ -17,11 +17,19 @@ export default function Header() {
     }
   }, []);
 
-  // Listen for dark mode changes from other browser tabs/components
+  // Listen for dark mode changes from other components
   useEffect(() => {
     const handleDarkModeChange = () => {
       const savedMode = localStorage.getItem("darkMode") === "true";
       setIsDark(savedMode);
+      
+      if (savedMode) {
+        document.documentElement.classList.add("dark");
+        document.body.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+        document.body.classList.remove("dark");
+      }
     };
 
     window.addEventListener("darkModeChange", handleDarkModeChange);
@@ -31,9 +39,11 @@ export default function Header() {
   const toggleDarkMode = () => {
     const newMode = !isDark;
     setIsDark(newMode);
-    localStorage.setItem("darkMode", String(newMode));
     
-    // Apply dark mode to document root
+    // Save to localStorage
+    localStorage.setItem("darkMode", newMode ? "true" : "false");
+    
+    // Update document classes immediately
     if (newMode) {
       document.documentElement.classList.add("dark");
       document.body.classList.add("dark");
@@ -42,7 +52,7 @@ export default function Header() {
       document.body.classList.remove("dark");
     }
     
-    // Dispatch event for other components to sync
+    // Dispatch event for App component to sync
     window.dispatchEvent(new Event("darkModeChange"));
   };
 

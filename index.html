@@ -8,8 +8,8 @@
     <title>app-store</title>
     <script>
         // Initialize dark mode from localStorage before React mounts
-        const isDarkMode = localStorage.getItem('darkMode') === 'true';
-        if (isDarkMode) {
+        const isDarkMode = localStorage.getItem('darkMode');
+        if (isDarkMode === 'true') {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark');
