@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import apps from "../data/apps.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell
@@ -12,6 +12,13 @@ export default function AppDetails() {
 
   const [installed, setInstalled] = useState(false);
 
+  // Check if app is already installed
+  useEffect(() => {
+    const saved = localStorage.getItem("installedApps");
+    const installedApps = saved ? JSON.parse(saved) : [];
+    setInstalled(installedApps.includes(parseInt(id)));
+  }, [id]);
+
   if (!app) {
     return (
       <div className="max-w-5xl mx-auto py-20 text-center">
@@ -22,6 +29,16 @@ export default function AppDetails() {
 
   const handleInstall = () => {
     setInstalled(true);
+    
+    // Save to localStorage
+    const saved = localStorage.getItem("installedApps");
+    const installedApps = saved ? JSON.parse(saved) : [];
+    
+    if (!installedApps.includes(app.id)) {
+      installedApps.push(app.id);
+      localStorage.setItem("installedApps", JSON.stringify(installedApps));
+    }
+    
     toast.success(`${app.title} installed successfully!`, {
       position: "bottom-right",
       autoClose: 3000,
@@ -127,7 +144,5 @@ export default function AppDetails() {
         </div>
       </div>
     </div>
-  );
-}
   );
 }
