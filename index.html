@@ -7,17 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>app-store</title>
     <script>
-        // Initialize dark mode from localStorage before React mounts
-        const isDarkMode = localStorage.getItem('darkMode');
-        if (isDarkMode === 'true') {
+        // Clear any corrupted localStorage values and initialize light mode by default
+        try {
+            const stored = localStorage.getItem('darkMode');
+            if (stored && stored !== 'true' && stored !== 'false') {
+                localStorage.removeItem('darkMode');
+            }
+        } catch (e) {
+            console.log('localStorage read error:', e);
+        }
+
+        // Start with clean slate - remove dark class if present
+        document.documentElement.classList.remove('dark');
+
+        // Only add dark mode if explicitly saved as 'true'
+        if (localStorage.getItem('darkMode') === 'true') {
             document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
         }
     </script>
 </head>
 
-<body>
+<body style="background-color: white; color: #111827;">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 </body>

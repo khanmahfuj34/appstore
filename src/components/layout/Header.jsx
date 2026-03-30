@@ -1,58 +1,27 @@
 import { NavLink, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Header() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => localStorage.getItem("darkMode") === "true");
 
-  // Apply initial dark mode on mount
-  useEffect(() => {
-    const isDarkMode = localStorage.getItem("darkMode") === "true";
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-      document.body.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      document.body.classList.remove("dark");
-    }
-  }, []);
-
-  // Listen for dark mode changes from other components
-  useEffect(() => {
-    const handleDarkModeChange = () => {
-      const savedMode = localStorage.getItem("darkMode") === "true";
-      setIsDark(savedMode);
-      
-      if (savedMode) {
-        document.documentElement.classList.add("dark");
-        document.body.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-        document.body.classList.remove("dark");
-      }
-    };
-
-    window.addEventListener("darkModeChange", handleDarkModeChange);
-    return () => window.removeEventListener("darkModeChange", handleDarkModeChange);
-  }, []);
-
   const toggleDarkMode = () => {
     const newMode = !isDark;
-    setIsDark(newMode);
     
-    // Save to localStorage
-    localStorage.setItem("darkMode", newMode ? "true" : "false");
-    
-    // Update document classes immediately
+    // Toggle dark class on HTML element
     if (newMode) {
       document.documentElement.classList.add("dark");
-      document.body.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
-      document.body.classList.remove("dark");
     }
     
-    // Dispatch event for App component to sync
+    // Save preference
+    localStorage.setItem("darkMode", newMode ? "true" : "false");
+    
+    // Update React state
+    setIsDark(newMode);
+    
+    // Dispatch event so App component can update
     window.dispatchEvent(new Event("darkModeChange"));
   };
 

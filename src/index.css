@@ -3,9 +3,15 @@
      :root {
         @apply transition-colors duration-200;
     }
+    /* Light mode - DEFAULT */
+    html,
     body {
         @apply bg-white text-gray-900;
     }
+    html:not(.dark) body {
+        @apply bg-white text-gray-900;
+    }
+    /* Dark mode - WHEN dark class is present */
     html.dark {
         @apply bg-gray-950 text-white;
         color-scheme: dark;
