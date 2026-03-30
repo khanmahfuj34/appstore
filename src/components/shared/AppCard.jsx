@@ -1,32 +1,6 @@
-import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 export default function AppCard({ app }) {
-  const handleInstall = (e) => {
-    e.preventDefault();
-    
-    // Save to localStorage
-    const saved = localStorage.getItem("installedApps");
-    const installedApps = saved ? JSON.parse(saved) : [];
-    
-    if (!installedApps.includes(app.id)) {
-      installedApps.push(app.id);
-      localStorage.setItem("installedApps", JSON.stringify(installedApps));
-      
-      // Dispatch custom event to notify other components
-      window.dispatchEvent(new Event("appsChanged"));
-    }
-    
-    toast.success(`${app.title} installed successfully!`, {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
-  };
-
   return (
     <Link to={`/apps/${app.id}`} className="no-underline">
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105 flex flex-col h-full">
@@ -53,13 +27,6 @@ export default function AppCard({ app }) {
             </div>
             <span className="text-gray-500 text-xs font-semibold bg-gray-100 px-2 py-1 rounded">{app.size}MB</span>
           </div>
-          
-          <button 
-            onClick={handleInstall}
-            className="w-full mt-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg active:scale-95"
-          >
-            Install
-          </button>
         </div>
       </div>
     </Link>
