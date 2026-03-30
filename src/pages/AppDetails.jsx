@@ -162,5 +162,6 @@ export default function AppDetails() {
         </div>
       </div>
     </div>
+    </>
   );
 }
