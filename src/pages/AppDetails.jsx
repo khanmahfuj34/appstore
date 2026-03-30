@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import apps from "../data/apps.json";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import Breadcrumb from "../components/shared/Breadcrumb";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell
 } from "recharts";
@@ -12,18 +13,30 @@ export default function AppDetails() {
 
   const [installed, setInstalled] = useState(false);
 
-  // Check if app is already installed
+  // Check if app is already installed and add to recently viewed
   useEffect(() => {
     const saved = localStorage.getItem("installedApps");
     const installedApps = saved ? JSON.parse(saved) : [];
     setInstalled(installedApps.includes(parseInt(id)));
-  }, [id]);
+
+    // Add to recently viewed
+    if (app) {
+      const recent = localStorage.getItem("recentlyViewed");
+      const recentIds = recent ? JSON.parse(recent) : [];
+      const updated = [app.id, ...recentIds.filter(id => id !== app.id)].slice(0, 10);
+      localStorage.setItem("recentlyViewed", JSON.stringify(updated));
+      window.dispatchEvent(new Event("recentlyViewedChanged"));
+    }
+  }, [id, app]);
 
   if (!app) {
     return (
-      <div className="max-w-5xl mx-auto py-20 text-center">
-        <p className="text-2xl text-gray-600">App Not Found</p>
-      </div>
+      <>
+        <Breadcrumb />
+        <div className="max-w-5xl mx-auto py-20 text-center">
+          <p className="text-2xl text-gray-600">App Not Found</p>
+        </div>
+      </>
     );
   }
 
@@ -60,24 +73,26 @@ export default function AppDetails() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen py-10">
-      <div className="max-w-6xl mx-auto px-4">
-        
-        {/* App Information Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* App Image */}
-            <div className="flex justify-center">
-              <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-2xl">
-                <img 
-                  src={app.image} 
-                  alt={app.title}
-                  className="w-40 h-40 object-contain drop-shadow-lg"
-                />
+    <>
+      <Breadcrumb />
+      <div className="bg-gray-50 min-h-screen py-10">
+        <div className="max-w-6xl mx-auto px-4">
+          
+          {/* App Information Section */}
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* App Image */}
+              <div className="flex justify-center">
+                <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-2xl">
+                  <img 
+                    src={app.image} 
+                    alt={app.title}
+                    className="w-40 h-40 object-contain drop-shadow-lg"
+                  />
+                </div>
               </div>
-            </div>
 
-            {/* App Details */}
+              {/* App Details */}
             <div className="md:col-span-2">
               <h1 className="text-4xl font-bold text-gray-900 mb-2">{app.title}</h1>
               <p className="text-gray-600 text-lg mb-6">{app.companyName}</p>

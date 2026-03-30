@@ -14,16 +14,18 @@ export default function Banner() {
           href="https://play.google.com" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="border border-gray-900 px-4 py-2 rounded hover:bg-gray-200 transition cursor-pointer inline-block"
+          className="bg-gradient-to-r from-green-400 to-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-500 hover:to-green-700 transition transform hover:scale-105 shadow-lg inline-flex items-center gap-2"
         >
+          <span className="text-xl">▶️</span>
           Google Play
         </a>
         <a 
           href="https://apps.apple.com" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="border border-gray-900 px-4 py-2 rounded hover:bg-gray-200 transition cursor-pointer inline-block"
+          className="bg-gradient-to-r from-gray-800 to-black text-white px-6 py-3 rounded-lg font-semibold hover:from-gray-900 hover:to-gray-800 transition transform hover:scale-105 shadow-lg inline-flex items-center gap-2"
         >
+          <span className="text-xl">🍎</span>
           App Store
         </a>
       </div>

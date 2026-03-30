@@ -1,12 +1,26 @@
 import { NavLink, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { DarkModeContext } from "../../context/DarkModeContext";
 
 export default function Header() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  // Simple dark mode state - will add context later
+  const [isDark, setIsDark] = useState(() => localStorage.getItem("darkMode") === "true");
+
+  const toggleDarkMode = () => {
+    const newMode = !isDark;
+    setIsDark(newMode);
+    localStorage.setItem("darkMode", String(newMode));
+    if (newMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  };
 
   return (
     <>
-      <div className="bg-[#0b1f2a] text-white">
+      <div className="bg-[#0b1f2a] text-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
 
           <Link to="/" className="font-bold text-xl">HERO.IO</Link>
@@ -34,6 +48,15 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className="px-3 py-1 rounded border border-purple-500 hover:bg-purple-600 transition text-sm"
+              title={isDark ? "Light Mode" : "Dark Mode"}
+            >
+              {isDark ? "☀️" : "🌙"}
+            </button>
+
             <a href="https://github.com">
               <button className="bg-purple-500 px-3 py-1 rounded hover:bg-purple-600 transition">
                 Contribute
@@ -55,7 +78,7 @@ export default function Header() {
 
       {/* Mobile Drawer */}
       {isDrawerOpen && (
-        <div className="md:hidden bg-[#0b1f2a] border-t border-gray-700 fixed inset-0 top-16 z-40">
+        <div className="md:hidden bg-[#0b1f2a] border-t border-gray-700 fixed inset-0 top-16 z-40 dark:bg-gray-900">
           <nav className="flex flex-col p-4 space-y-4">
             <NavLink 
               to="/" 
