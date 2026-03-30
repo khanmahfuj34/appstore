@@ -31,12 +31,12 @@ export default function AppDetails() {
 
   if (!app) {
     return (
-      <>
+      <div className="bg-white dark:bg-gray-950 transition-colors duration-200 min-h-screen">
         <Breadcrumb />
         <div className="max-w-5xl mx-auto py-20 text-center">
-          <p className="text-2xl text-gray-600">App Not Found</p>
+          <p className="text-2xl text-gray-600 dark:text-gray-300">App Not Found</p>
         </div>
-      </>
+      </div>
     );
   }
 
@@ -73,9 +73,9 @@ export default function AppDetails() {
   };
 
   return (
-    <>
+    <div className="bg-white dark:bg-gray-950 transition-colors duration-200 min-h-screen">
       <Breadcrumb />
-      <div className="bg-gray-50 dark:bg-gray-950 min-h-screen py-10 transition-colors duration-200">
+      <div className="bg-gray-50 dark:bg-gray-950 py-10">
         <div className="max-w-6xl mx-auto px-4">
           
           {/* App Information Section */}
@@ -154,14 +154,14 @@ export default function AppDetails() {
         </div>
 
         {/* Description Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Description</h2>
-          <p className="text-gray-700 leading-relaxed text-base whitespace-pre-line">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900 p-8">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Description</h2>
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base whitespace-pre-line">
             {app.description}
           </p>
         </div>
       </div>
     </div>
-    </>
+    </div>
   );
 }

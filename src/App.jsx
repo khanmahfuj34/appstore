@@ -19,11 +19,15 @@ export default function App() {
   }, []);
 
   return (
-    <div className={`min-h-screen transition-colors duration-200 ${isDark ? "dark:bg-gray-950" : "bg-white"}`}>
+    <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-200">
       <Header />
-      <Outlet />
+      <main className="bg-white dark:bg-gray-950 transition-colors duration-200">
+        <Outlet />
+      </main>
       <Footer />
-      <ToastContainer />
+      <ToastContainer 
+        theme={isDark ? "dark" : "light"}
+      />
     </div>
   );
 }

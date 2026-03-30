@@ -3,14 +3,12 @@ import { useState, useEffect } from "react";
 
 export default function Header() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(localStorage.getItem("darkMode") === "true");
 
-  // Apply dark mode on mount and when it changes
+  // Sync dark mode state when component mounts
   useEffect(() => {
-    const savedMode = localStorage.getItem("darkMode") === "true";
-    setIsDark(savedMode);
-    
-    if (savedMode) {
+    const currentMode = localStorage.getItem("darkMode") === "true";
+    if (currentMode) {
       document.documentElement.classList.add("dark");
       document.body.classList.add("dark");
     } else {
@@ -19,7 +17,7 @@ export default function Header() {
     }
   }, []);
 
-  // Listen for dark mode changes from other tabs/components
+  // Listen for dark mode changes from other browser tabs/components
   useEffect(() => {
     const handleDarkModeChange = () => {
       const savedMode = localStorage.getItem("darkMode") === "true";
@@ -35,7 +33,7 @@ export default function Header() {
     setIsDark(newMode);
     localStorage.setItem("darkMode", String(newMode));
     
-    // Apply dark mode to document
+    // Apply dark mode to document root
     if (newMode) {
       document.documentElement.classList.add("dark");
       document.body.classList.add("dark");
@@ -44,7 +42,7 @@ export default function Header() {
       document.body.classList.remove("dark");
     }
     
-    // Dispatch event for other components
+    // Dispatch event for other components to sync
     window.dispatchEvent(new Event("darkModeChange"));
   };
 

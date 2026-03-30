@@ -27,9 +27,9 @@ export default function Apps() {
   );
 
   return (
-    <>
+    <div className="bg-white dark:bg-gray-950 transition-colors duration-200 min-h-screen">
       <Breadcrumb />
-      <div className="max-w-7xl mx-auto py-10 px-4 dark:bg-gray-950 transition-colors duration-200">
+      <div className="max-w-7xl mx-auto py-10 px-4">
         <div className="flex flex-col sm:flex-row sm:justify-between mb-6 gap-4">
           <p className="font-semibold dark:text-white">{filtered.length} Apps Found</p>
 
@@ -60,6 +60,6 @@ export default function Apps() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
