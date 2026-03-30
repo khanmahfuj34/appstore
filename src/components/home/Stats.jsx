@@ -13,19 +13,19 @@ export default function Stats() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-purple-600 to-indigo-500 text-white py-10">
-      <div className="grid md:grid-cols-3 text-center">
+    <div className="bg-gradient-to-r from-purple-600 to-indigo-500 text-white py-8 sm:py-10 px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 text-center">
         <div>
-          <h2 className="text-3xl font-bold">{formatNumber(totalDownloads)}</h2>
-          <p className="text-gray-100">Downloads</p>
+          <h2 className="text-2xl sm:text-3xl font-bold">{formatNumber(totalDownloads)}</h2>
+          <p className="text-gray-100 text-sm sm:text-base">Downloads</p>
         </div>
         <div>
-          <h2 className="text-3xl font-bold">{formatNumber(totalReviews)}</h2>
-          <p className="text-gray-100">Reviews</p>
+          <h2 className="text-2xl sm:text-3xl font-bold">{formatNumber(totalReviews)}</h2>
+          <p className="text-gray-100 text-sm sm:text-base">Reviews</p>
         </div>
         <div>
-          <h2 className="text-3xl font-bold">{totalApps}+</h2>
-          <p className="text-gray-100">Apps</p>
+          <h2 className="text-2xl sm:text-3xl font-bold">{totalApps}+</h2>
+          <p className="text-gray-100 text-sm sm:text-base">Apps</p>
         </div>
       </div>
     </div>
