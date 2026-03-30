@@ -37,17 +37,19 @@ export default function Installation() {
       .filter(Boolean);
   };
 
-  // Sort apps
+  // Sort apps with new options
   const sortedApps = () => {
     const appDetails = getInstalledAppDetails();
     let sorted = [...appDetails];
 
-    if (sortBy === "size") {
+    if (sortBy === "downloads-high-low") {
+      sorted.sort((a, b) => b.downloads - a.downloads);
+    } else if (sortBy === "downloads-low-high") {
+      sorted.sort((a, b) => a.downloads - b.downloads);
+    } else if (sortBy === "size") {
       sorted.sort((a, b) => b.size - a.size);
     } else if (sortBy === "rating") {
       sorted.sort((a, b) => b.ratingAvg - a.ratingAvg);
-    } else if (sortBy === "downloads") {
-      sorted.sort((a, b) => b.downloads - a.downloads);
     }
 
     return sorted;
@@ -95,9 +97,10 @@ export default function Installation() {
             className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 cursor-pointer hover:border-purple-500 focus:outline-none focus:border-purple-500"
           >
             <option value="default">Sort By Default</option>
-            <option value="size">Sort By Size</option>
+            <option value="downloads-high-low">Downloads: High to Low</option>
+            <option value="downloads-low-high">Downloads: Low to High</option>
             <option value="rating">Sort By Rating</option>
-            <option value="downloads">Sort By Downloads</option>
+            <option value="size">Sort By Size</option>
           </select>
         </div>
 
