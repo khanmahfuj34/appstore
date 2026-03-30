@@ -1,23 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import apps from "../data/apps.json";
 import { toast } from "react-toastify";
 
 export default function Installation() {
-  const [installedApps, setInstalledApps] = useState([]);
+  const [installedApps, setInstalledApps] = useState(() => {
+    const saved = localStorage.getItem("installedApps");
+    return saved ? JSON.parse(saved) : [];
+  });
   const [sortBy, setSortBy] = useState("default");
 
   // Load installed apps from localStorage
-  const loadInstalledApps = () => {
+  const loadInstalledApps = useCallback(() => {
     const saved = localStorage.getItem("installedApps");
     if (saved) {
       setInstalledApps(JSON.parse(saved));
     }
-  };
+  }, []);
 
   // Load on mount and listen for localStorage changes
   useEffect(() => {
-    loadInstalledApps();
-
     // Listen for storage changes from other tabs/windows
     window.addEventListener("storage", loadInstalledApps);
 
@@ -28,7 +29,7 @@ export default function Installation() {
       window.removeEventListener("storage", loadInstalledApps);
       window.removeEventListener("appsChanged", loadInstalledApps);
     };
-  }, []);
+  }, [loadInstalledApps]);
 
   // Get full app details for installed apps
   const getInstalledAppDetails = () => {
@@ -120,7 +121,7 @@ export default function Installation() {
                 {/* App Info */}
                 <div className="flex items-start sm:items-center gap-3 sm:gap-4 flex-1">
                   {/* App Icon */}
-                  <div className="bg-gray-100 dark:bg-gray-700 p-2 sm:p-3 rounded-lg flex-shrink-0">
+                  <div className="bg-gray-100 dark:bg-gray-700 p-2 sm:p-3 rounded-lg shrink-0">
                     <img
                       src={app.image}
                       alt={app.title}

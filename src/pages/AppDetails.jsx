@@ -83,7 +83,7 @@ export default function AppDetails() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
               {/* App Image */}
               <div className="flex justify-center md:col-span-1">
-                <div className="bg-gradient-to-br from-gray-50 dark:from-gray-700 to-gray-100 dark:to-gray-800 p-4 sm:p-6 rounded-2xl">
+                <div className="bg-linear-to-br from-gray-50 dark:from-gray-700 to-gray-100 dark:to-gray-800 p-4 sm:p-6 rounded-2xl">
                   <img 
                     src={app.image} 
                     alt={app.title}
@@ -99,17 +99,17 @@ export default function AppDetails() {
 
                 {/* Stats Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
-                <div className="bg-gradient-to-br from-blue-50 dark:from-blue-900/30 to-blue-100 dark:to-blue-800/30 p-3 sm:p-4 rounded-lg">
+                <div className="bg-linear-to-br from-blue-50 dark:from-blue-900/30 to-blue-100 dark:to-blue-800/30 p-3 sm:p-4 rounded-lg">
                   <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm font-semibold">Size</p>
                   <p className="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400">{app.size}MB</p>
                 </div>
-                <div className="bg-gradient-to-br from-yellow-50 dark:from-yellow-900/30 to-yellow-100 dark:to-yellow-800/30 p-3 sm:p-4 rounded-lg">
+                <div className="bg-linear-to-br from-yellow-50 dark:from-yellow-900/30 to-yellow-100 dark:to-yellow-800/30 p-3 sm:p-4 rounded-lg">
                   <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm font-semibold">Rating</p>
                   <p className="text-xl sm:text-2xl font-bold text-yellow-600 dark:text-yellow-400">
                     ★ {app.ratingAvg}
                   </p>
                 </div>
-                <div className="bg-gradient-to-br from-purple-50 dark:from-purple-900/30 to-purple-100 dark:to-purple-800/30 p-3 sm:p-4 rounded-lg">
+                <div className="bg-linear-to-br from-purple-50 dark:from-purple-900/30 to-purple-100 dark:to-purple-800/30 p-3 sm:p-4 rounded-lg">
                   <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm font-semibold">Downloads</p>
                   <p className="text-xl sm:text-2xl font-bold text-purple-600 dark:text-purple-400">{formatNumber(app.downloads)}</p>
                 </div>
@@ -127,14 +127,13 @@ export default function AppDetails() {
                 className={`w-full sm:w-auto px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-bold text-white transition-all duration-300 text-sm sm:text-base ${
                   installed
                     ? "bg-gray-400 dark:bg-gray-600 cursor-not-allowed"
-                    : "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg hover:shadow-xl"
+                    : "bg-linear-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg hover:shadow-xl"
                 }`}
               >
                 {installed ? "✓ Installed" : "Install Now"}
               </button>
             </div>
           </div>
-        </div>
 
         {/* Ratings Section */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900 p-4 sm:p-6 md:p-8 mb-6 sm:mb-8">

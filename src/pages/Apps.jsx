@@ -1,25 +1,19 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import apps from "../data/apps.json";
 import AppCard from "../components/shared/AppCard";
 import SkeletonCard from "../components/shared/SkeletonCard";
 import Breadcrumb from "../components/shared/Breadcrumb";
-import { debounce } from "../utils/debounce";
 
 export default function Apps() {
   const [search, setSearch] = useState("");
   const [isSearching, setIsSearching] = useState(false);
 
-  const debouncedSearch = useCallback(
-    debounce((value) => {
-      setIsSearching(false);
-    }, 500),
-    []
-  );
-
   const handleSearch = (e) => {
     setSearch(e.target.value);
     setIsSearching(true);
-    debouncedSearch(e.target.value);
+    setTimeout(() => {
+      setIsSearching(false);
+    }, 500);
   };
 
   const filtered = apps.filter(app =>

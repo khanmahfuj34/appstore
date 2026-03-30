@@ -13,7 +13,7 @@ export default function Stats() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-purple-600 to-indigo-500 text-white py-6 sm:py-8 md:py-10 px-3 sm:px-4">
+    <div className="bg-linear-to-r from-purple-600 to-indigo-500 text-white py-6 sm:py-8 md:py-10 px-3 sm:px-4">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center max-w-7xl mx-auto">
         <div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">{formatNumber(totalDownloads)}</h2>
