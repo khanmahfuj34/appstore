@@ -1,29 +1,10 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
+import { useDarkMode } from "../../hooks/useDarkMode";
 
 export default function Header() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isDark, setIsDark] = useState(() => localStorage.getItem("darkMode") === "true");
-
-  const toggleDarkMode = () => {
-    const newMode = !isDark;
-    
-    // Toggle dark class on HTML element
-    if (newMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    
-    // Save preference
-    localStorage.setItem("darkMode", newMode ? "true" : "false");
-    
-    // Update React state
-    setIsDark(newMode);
-    
-    // Dispatch event so App component can update
-    window.dispatchEvent(new Event("darkModeChange"));
-  };
+  const { isDark, toggle: toggleDarkMode } = useDarkMode();
 
   return (
     <>

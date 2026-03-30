@@ -7,23 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>app-store</title>
     <script>
-        // Clear any corrupted localStorage values and initialize light mode by default
-        try {
-            const stored = localStorage.getItem('darkMode');
-            if (stored && stored !== 'true' && stored !== 'false') {
-                localStorage.removeItem('darkMode');
+        (function() {
+            try {
+                const theme = localStorage.getItem('theme') || 'light';
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch (e) {
+                console.error('Failed to initialize theme:', e);
             }
-        } catch (e) {
-            console.log('localStorage read error:', e);
-        }
-
-        // Start with clean slate - remove dark class if present
-        document.documentElement.classList.remove('dark');
-
-        // Only add dark mode if explicitly saved as 'true'
-        if (localStorage.getItem('darkMode') === 'true') {
-            document.documentElement.classList.add('dark');
-        }
+        })();
     </script>
 </head>
 
