@@ -29,14 +29,14 @@ export default function Apps() {
   return (
     <>
       <Breadcrumb />
-      <div className="max-w-7xl mx-auto py-10 px-4">
+      <div className="max-w-7xl mx-auto py-10 px-4 dark:bg-gray-950 transition-colors duration-200">
         <div className="flex flex-col sm:flex-row sm:justify-between mb-6 gap-4">
-          <p className="font-semibold">{filtered.length} Apps Found</p>
+          <p className="font-semibold dark:text-white">{filtered.length} Apps Found</p>
 
           <div className="relative">
             <input
               placeholder="Search"
-              className="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:border-purple-500 w-full sm:w-64"
+              className="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:border-purple-500 w-full sm:w-64 dark:bg-gray-800 dark:text-white dark:border-gray-700"
               onChange={handleSearch}
               value={search}
             />
@@ -48,7 +48,7 @@ export default function Apps() {
           </div>
         </div>
 
-        {filtered.length === 0 && <p className="text-center text-gray-600">No App Found</p>}
+        {filtered.length === 0 && <p className="text-center text-gray-600 dark:text-gray-300">No App Found</p>}
 
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {isSearching ? (

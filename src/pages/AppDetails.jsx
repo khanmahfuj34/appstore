@@ -75,27 +75,27 @@ export default function AppDetails() {
   return (
     <>
       <Breadcrumb />
-      <div className="bg-gray-50 min-h-screen py-10">
+      <div className="bg-gray-50 dark:bg-gray-950 min-h-screen py-10 transition-colors duration-200">
         <div className="max-w-6xl mx-auto px-4">
           
           {/* App Information Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900 p-8 mb-8">
             <div className="grid md:grid-cols-3 gap-8">
               {/* App Image */}
               <div className="flex justify-center">
-                <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-2xl">
-                  <img 
-                    src={app.image} 
-                    alt={app.title}
-                    className="w-40 h-40 object-contain drop-shadow-lg"
-                  />
-                </div>
-              </div>
+<div className="bg-gradient-to-br from-gray-50 dark:from-gray-700 to-gray-100 dark:to-gray-800 p-6 rounded-2xl">
+              <img 
+                src={app.image} 
+                alt={app.title}
+                className="w-40 h-40 object-contain drop-shadow-lg"
+              />
+            </div>
+          </div>
 
-              {/* App Details */}
+          {/* App Details */}
             <div className="md:col-span-2">
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">{app.title}</h1>
-              <p className="text-gray-600 text-lg mb-6">{app.companyName}</p>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">{app.title}</h1>
+              <p className="text-gray-600 dark:text-gray-300 text-lg mb-6">{app.companyName}</p>
 
               {/* Stats Grid */}
               <div className="grid grid-cols-3 gap-4 mb-8">

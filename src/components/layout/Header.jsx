@@ -1,21 +1,51 @@
 import { NavLink, Link } from "react-router-dom";
-import { useState, useContext } from "react";
-import { DarkModeContext } from "../../context/DarkModeContext";
+import { useState, useEffect } from "react";
 
 export default function Header() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  // Simple dark mode state - will add context later
-  const [isDark, setIsDark] = useState(() => localStorage.getItem("darkMode") === "true");
+  const [isDark, setIsDark] = useState(false);
+
+  // Apply dark mode on mount and when it changes
+  useEffect(() => {
+    const savedMode = localStorage.getItem("darkMode") === "true";
+    setIsDark(savedMode);
+    
+    if (savedMode) {
+      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.body.classList.remove("dark");
+    }
+  }, []);
+
+  // Listen for dark mode changes from other tabs/components
+  useEffect(() => {
+    const handleDarkModeChange = () => {
+      const savedMode = localStorage.getItem("darkMode") === "true";
+      setIsDark(savedMode);
+    };
+
+    window.addEventListener("darkModeChange", handleDarkModeChange);
+    return () => window.removeEventListener("darkModeChange", handleDarkModeChange);
+  }, []);
 
   const toggleDarkMode = () => {
     const newMode = !isDark;
     setIsDark(newMode);
     localStorage.setItem("darkMode", String(newMode));
+    
+    // Apply dark mode to document
     if (newMode) {
       document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
+      document.body.classList.remove("dark");
     }
+    
+    // Dispatch event for other components
+    window.dispatchEvent(new Event("darkModeChange"));
   };
 
   return (
@@ -48,10 +78,10 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
-            {/* Dark Mode Toggle */}
+            {/* Dark Mode Toggle - No Border */}
             <button
               onClick={toggleDarkMode}
-              className="px-3 py-1 rounded border border-purple-500 hover:bg-purple-600 transition text-sm"
+              className="px-3 py-1 rounded hover:bg-purple-600 transition text-lg"
               title={isDark ? "Light Mode" : "Dark Mode"}
             >
               {isDark ? "☀️" : "🌙"}

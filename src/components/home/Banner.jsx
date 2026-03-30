@@ -1,11 +1,11 @@
 export default function Banner() {
   return (
-    <div className="text-center py-12 sm:py-16 bg-gray-100 px-4">
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+    <div className="text-center py-12 sm:py-16 bg-gray-100 dark:bg-gray-900 px-4 transition-colors duration-200">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-white">
         We Build <span className="text-purple-500">Productive</span> Apps
       </h1>
 
-      <p className="mt-3 sm:mt-4 text-gray-500 text-sm sm:text-base">
+      <p className="mt-3 sm:mt-4 text-gray-500 dark:text-gray-300 text-sm sm:text-base">
         Smart apps to simplify your life
       </p>
 
