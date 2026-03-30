@@ -10,8 +10,22 @@ export default function Banner() {
       </p>
 
       <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3 sm:space-x-4">
-        <button className="border border-gray-900 px-4 py-2 rounded hover:bg-gray-200 transition">Google Play</button>
-        <button className="border border-gray-900 px-4 py-2 rounded hover:bg-gray-200 transition">App Store</button>
+        <a 
+          href="https://play.google.com" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="border border-gray-900 px-4 py-2 rounded hover:bg-gray-200 transition cursor-pointer inline-block"
+        >
+          Google Play
+        </a>
+        <a 
+          href="https://apps.apple.com" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="border border-gray-900 px-4 py-2 rounded hover:bg-gray-200 transition cursor-pointer inline-block"
+        >
+          App Store
+        </a>
       </div>
     </div>
   );
