@@ -37,6 +37,9 @@ export default function AppDetails() {
     if (!installedApps.includes(app.id)) {
       installedApps.push(app.id);
       localStorage.setItem("installedApps", JSON.stringify(installedApps));
+      
+      // Dispatch custom event to notify other components
+      window.dispatchEvent(new Event("appsChanged"));
     }
     
     toast.success(`${app.title} installed successfully!`, {

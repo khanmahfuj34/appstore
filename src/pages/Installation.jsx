@@ -7,11 +7,27 @@ export default function Installation() {
   const [sortBy, setSortBy] = useState("default");
 
   // Load installed apps from localStorage
-  useEffect(() => {
+  const loadInstalledApps = () => {
     const saved = localStorage.getItem("installedApps");
     if (saved) {
       setInstalledApps(JSON.parse(saved));
     }
+  };
+
+  // Load on mount and listen for localStorage changes
+  useEffect(() => {
+    loadInstalledApps();
+
+    // Listen for storage changes from other tabs/windows
+    window.addEventListener("storage", loadInstalledApps);
+
+    // Listen for custom events from same page
+    window.addEventListener("appsChanged", loadInstalledApps);
+
+    return () => {
+      window.removeEventListener("storage", loadInstalledApps);
+      window.removeEventListener("appsChanged", loadInstalledApps);
+    };
   }, []);
 
   // Get full app details for installed apps
@@ -41,6 +57,10 @@ export default function Installation() {
     const updated = installedApps.filter(id => id !== appId);
     setInstalledApps(updated);
     localStorage.setItem("installedApps", JSON.stringify(updated));
+    
+    // Dispatch custom event to notify other components
+    window.dispatchEvent(new Event("appsChanged"));
+    
     toast.info(`${appTitle} uninstalled`, {
       position: "bottom-right",
       autoClose: 2000,
