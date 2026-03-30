@@ -13,19 +13,19 @@ export default function Stats() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-purple-600 to-indigo-500 text-white py-8 sm:py-10 px-4">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 text-center">
+    <div className="bg-gradient-to-r from-purple-600 to-indigo-500 text-white py-6 sm:py-8 md:py-10 px-3 sm:px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center max-w-7xl mx-auto">
         <div>
-          <h2 className="text-2xl sm:text-3xl font-bold">{formatNumber(totalDownloads)}</h2>
-          <p className="text-gray-100 text-sm sm:text-base">Downloads</p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">{formatNumber(totalDownloads)}</h2>
+          <p className="text-gray-100 text-xs sm:text-sm md:text-base mt-1">Downloads</p>
         </div>
         <div>
-          <h2 className="text-2xl sm:text-3xl font-bold">{formatNumber(totalReviews)}</h2>
-          <p className="text-gray-100 text-sm sm:text-base">Reviews</p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">{formatNumber(totalReviews)}</h2>
+          <p className="text-gray-100 text-xs sm:text-sm md:text-base mt-1">Reviews</p>
         </div>
         <div>
-          <h2 className="text-2xl sm:text-3xl font-bold">{totalApps}+</h2>
-          <p className="text-gray-100 text-sm sm:text-base">Apps</p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">{totalApps}+</h2>
+          <p className="text-gray-100 text-xs sm:text-sm md:text-base mt-1">Apps</p>
         </div>
       </div>
     </div>

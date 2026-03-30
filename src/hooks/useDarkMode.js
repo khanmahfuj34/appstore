@@ -2,20 +2,26 @@ import { useState, useEffect } from 'react';
 
 export function useDarkMode() {
     const [isDark, setIsDark] = useState(() => {
-        // Initialize from localStorage
+        // Initialize from localStorage or fallback to system preference
         try {
-            return localStorage.getItem('theme') === 'dark';
+            const savedItem = localStorage.getItem('theme');
+            if (savedItem) {
+                return savedItem === 'dark';
+            }
+            return window.matchMedia('(prefers-color-scheme: dark)').matches;
         } catch {
             return false;
         }
     });
 
     useEffect(() => {
-        // Apply theme on mount
+        const root = document.documentElement;
+        
+        // Apply theme on mount and when isDark changes
         if (isDark) {
-            document.documentElement.classList.add('dark');
+            root.classList.add('dark');
         } else {
-            document.documentElement.classList.remove('dark');
+            root.classList.remove('dark');
         }
 
         // Save to localStorage
@@ -26,8 +32,22 @@ export function useDarkMode() {
         }
     }, [isDark]);
 
+    // Listen to custom event for syncing across multiple instances of the hook
+    useEffect(() => {
+        const syncTheme = (e) => {
+            if (e.detail !== isDark) {
+                setIsDark(e.detail);
+            }
+        };
+
+        window.addEventListener('theme-changed', syncTheme);
+        return () => window.removeEventListener('theme-changed', syncTheme);
+    }, [isDark]);
+
     const toggle = () => {
-        setIsDark(prev => !prev);
+        const newValue = !isDark;
+        setIsDark(newValue);
+        window.dispatchEvent(new CustomEvent('theme-changed', { detail: newValue }));
     };
 
     return {
