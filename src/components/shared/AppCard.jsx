@@ -19,7 +19,7 @@ export default function AppCard({ app }) {
           
           <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm my-2 sm:my-3 line-clamp-2 flex-grow">{app.description}</p>
           
-          <div className="flex justify-between items-center mt-auto pt-2 sm:pt-3 border-t border-gray-200 dark:border-gray-700">
+          <div className="flex flex-wrap justify-between items-center mt-auto pt-2 sm:pt-3 border-t border-gray-200 dark:border-gray-700 gap-2">
             <div className="flex items-center gap-1 sm:gap-2">
               <span className="text-yellow-400 text-base sm:text-lg">★</span>
               <span className="font-bold text-sm sm:text-base text-gray-900 dark:text-white">{app.ratingAvg}</span>

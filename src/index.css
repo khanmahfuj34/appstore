@@ -1,18 +1,17 @@
 @import "tailwindcss";
 
 /* Tailwind v4 requires defining custom variants for class-based dark mode */
-@custom-variant dark (&:where(.dark, .dark *));
 
+@custom-variant dark (&:where(.dark, .dark *));
 @layer base {
-    :root {
+     :root {
         @apply transition-colors duration-300;
     }
-    
     html,
     body {
         @apply bg-white text-gray-900 transition-colors duration-300 ease-in-out;
+        overflow-x: hidden;
     }
-    
     html.dark,
     html.dark body {
         @apply bg-gray-950 text-white;

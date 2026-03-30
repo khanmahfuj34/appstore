@@ -50,7 +50,7 @@ export default function Apps() {
 
         {filtered.length === 0 && <p className="text-center text-sm sm:text-base text-gray-600 dark:text-gray-300">No App Found</p>}
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-4 md:gap-6">
           {isSearching ? (
             Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
           ) : (

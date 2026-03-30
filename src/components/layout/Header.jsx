@@ -54,7 +54,7 @@ export default function Header() {
               )}
             </button>
 
-            <a href="https://github.com">
+            <a href="https://github.com" className="hidden sm:block">
               <button className="bg-purple-500 px-3 py-1 rounded hover:bg-purple-600 transition text-white">
                 Contribute
               </button>
@@ -83,8 +83,8 @@ export default function Header() {
 
       {/* Mobile Drawer */}
       <div 
-        className={`md:hidden fixed top-0 right-0 h-full w-64 bg-[#0b1f2a] dark:bg-gray-900 border-l border-gray-700 z-50 transform transition-transform duration-300 ease-in-out ${
-          isDrawerOpen ? "translate-x-0" : "translate-x-full"
+        className={`md:hidden fixed top-0 right-0 h-full w-64 bg-[#0b1f2a] dark:bg-gray-900 border-l border-gray-700 z-50 transform transition-all duration-300 ease-in-out ${
+          isDrawerOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none"
         }`}
       >
         <div className="flex justify-end p-4">

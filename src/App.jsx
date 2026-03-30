@@ -9,9 +9,9 @@ export default function App() {
   const { isDark } = useDarkMode();
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-200">
+    <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-200 overflow-x-hidden">
       <Header />
-      <main className="bg-white dark:bg-gray-950 transition-colors duration-200">
+      <main className="bg-white dark:bg-gray-950 transition-colors duration-200 min-h-screen">
         <Outlet />
       </main>
       <Footer />
